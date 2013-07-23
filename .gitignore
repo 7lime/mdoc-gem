@@ -25,6 +25,7 @@ docs/*
 docs/*
 doc/**/*
 doc/**/*
+*.gem
 tags
 Gemfile.lock
 .dev_flow
