@@ -128,3 +128,7 @@ You can disable some of the processors by:
 
 Unless you define a method `repeatable?` and returns `true`, one processor will
 process a document at most once.
+
+## Tests
+
+    rubocop && rspec
