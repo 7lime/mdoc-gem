@@ -5,7 +5,8 @@ module Mdoc
         title = doc.title
         if title
           unless doc.body =~ /^\s*\#*\s*#{title}/
-            title = '# ' + title + "\n\n"
+            title = '# ' << title << "\n"
+            title << "{: .title .no_toc}\n\n"
             doc.body = title + doc.body
           end
         end
