@@ -14,7 +14,7 @@ module Mdoc
     def initialize(path)
       if path.is_a?(String)
         @file = path
-        path = File.new(@file, 'r:utf-8')
+        path = File.new(@file, 'r:bom|utf-8')
       end
 
       # initialize performed processor list
