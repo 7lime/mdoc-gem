@@ -3,7 +3,7 @@ require 'mdoc/version'
 
 Gem::Specification.new 'mdoc', Mdoc::VERSION do |s|
   s.description       = 'A tool for convert document between several different formats.'
-  s.summary           = 'A tool for convert document between several different formats.'
+  s.summary           = 'Convert markdown/reStructure/... of documents to html/docx/pdf/... formats.'
   s.authors           = ['Huang Wei']
   s.email             = 'huangw@pe-po.com'
   s.homepage          = 'https://github.com/7lime/mdoc-gem'
