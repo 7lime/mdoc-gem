@@ -39,8 +39,8 @@ Or print out to STDOUT:
 The default source file format is markdown[^1]. Mdoc convert it into a document class
 `Mdoc::Document::Kramdown`, with supports all extensions from Kramdown[^2].
 
-[^1]: Wikipedia: http://en.wikipedia.org/wiki/Markdown
-[^2]: Kramdown Syntax: http://kramdown.rubyforge.org/quickref.html
+[^1]: Wikipedia: ->http://en.wikipedia.org/wiki/Markdown
+[^2]: Kramdown Syntax: ->http://kramdown.rubyforge.org/quickref.html
 
 Additionally, you can put meta informations in the begin of your source file, in two
 different format:
@@ -77,6 +77,7 @@ The following processors are enabled by default:
 - `add_toc`: Add `table of contents` field in the contents body;
 - `add_title`: Add a `meta.title` as a first level header in the contents body;
 - `smart_code_block`: delete extra heading/trailing blank lines in code blocks;
+- `expand_link`: expand `->http ...` to `[http ... ](http ...)` (add hyper link);
 
 You can disable some of the processors by:
 

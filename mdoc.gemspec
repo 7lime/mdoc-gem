@@ -9,6 +9,7 @@ Gem::Specification.new 'mdoc', Mdoc::VERSION do |s|
   s.homepage          = 'https://github.com/7lime/mdoc-gem'
   s.files             = `git ls-files`.split("\n") - %w[.gitignore]
   s.executables       << 'mdoc'
+  s.license           = 'MIT'
   s.test_files        = Dir.glob('{spec,test}/**/*.rb')
 
   s.add_dependency 'kramdown'

@@ -7,6 +7,7 @@ require 'mdoc/processor'
 require 'mdoc/processor/smart_code_block'
 require 'mdoc/processor/add_title'
 require 'mdoc/processor/add_toc'
+require 'mdoc/processor/expand_link'
 require 'mdoc/pipeline'
 require 'mdoc/writer'
 
@@ -129,6 +130,7 @@ module Mdoc
       add_toc
       add_title
       smart_code_block
+      expand_link
     ]
   end
 
