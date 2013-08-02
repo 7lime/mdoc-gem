@@ -30,9 +30,11 @@ module Mdoc
     end
   end
 
-  class Writer
-    class NilWriter < Writer
-      def process!(doc); end
+  class NilWriter < Writer
+    def process!(doc); end
+
+    def default_processors
+      []
     end
   end
 end
@@ -42,12 +44,13 @@ describe Mdoc::Pipeline do
     subject(:doc) do
       Mdoc.convert!('spec/fixtures/multikeys.md') do |pl|
         pl.insert('proc_wrap')
-        pl.writer = Mdoc::Writer::NilWriter
+        pl.writer = Mdoc::NilWriter
       end
     end
 
     it 'perform 3 processors' do
-      doc.performed.size.should eq(3 + Mdoc.default_processors.size)
+      ps = Mdoc.default_processors(Mdoc::Writer).size
+      doc.performed.size.should eq(3 + ps)
       doc.performed[Mdoc::Processor::ProcB].should eq(1)
     end
   end
@@ -63,7 +66,8 @@ describe Mdoc::Pipeline do
 
     it 'perform 5 processors' do
       doc.is_a?(Mdoc::Document::Kramdown).should be_true
-      doc.performed.size.should eq(5 + Mdoc.default_processors.size)
+      ps = Mdoc.default_processors(Mdoc::Writer).size
+      doc.performed.size.should eq(5 + ps)
       doc.performed[Mdoc::Processor::ProcD].should eq(1)
       doc.performed[Mdoc::Processor::ProcC].should eq(1)
       doc.body.should eq('c') # d insert before c
@@ -80,7 +84,7 @@ describe Mdoc::Pipeline do
         pl.append('proc_b')
         pl.insert('proc_d', { after: 'proc_b' })
         pl.remove(['proc_b'])
-        pl.writer = Mdoc::Writer::NilWriter
+        pl.writer = Mdoc::NilWriter
       end
     end
 

@@ -135,7 +135,7 @@ module Mdoc
       PandocWriter
     when /(epub|docx)/ # no native support
       PandocWriter
-    else Write
+    else Writer
     end
   end
 end
