@@ -133,7 +133,9 @@ module Mdoc
     case opts.template
     when /pandoc\.\w+$/
       PandocWriter
-    else Writer
+    when /(epub|docx)/ # no native support
+      PandocWriter
+    else Write
     end
   end
 end
