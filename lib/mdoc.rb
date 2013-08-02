@@ -31,11 +31,12 @@ module Mdoc
   def convert!(fname, doc_type = nil)
     doc = prepare_doc(fname, doc_type)
 
-    # apply pipeline of processors
-    pli = default_pipeline(doc)
+    # apply pipeline of processors # TODO: separate writer
+    writer = find_writer(doc)
+    pli = default_pipeline(doc, writer)
     yield pli if block_given? # receive user supplied processors
+    pli.writer = writer unless pli.writer
 
-    pli.writer = find_writer(doc) unless pli.writer
     pli.apply!(doc)
     doc # return doc
   end
@@ -117,20 +118,15 @@ module Mdoc
   end
 
   # get a list of processors into a pipline
-  def default_pipeline(doc)
-    pli = Pipeline.new default_processors
+  def default_pipeline(doc, writer)
+    pli = Pipeline.new default_processors(writer)
     opts.processors.each { |p| pli.append p }
     opts.no_processors.each { |p| pli.remove p }
     pli
   end
 
-  def default_processors
-    %w[
-      add_toc
-      add_title
-      smart_code_block
-      expand_link
-    ]
+  def default_processors(writer)
+    writer.new.default_processors
   end
 
   def find_writer(doc)

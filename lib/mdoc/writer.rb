@@ -14,5 +14,14 @@ module Mdoc
       oh.write @tilt.render(doc)
       oh.close unless oh == $stdout
     end
+
+    def default_processors
+      %w[
+        add_toc
+        add_title
+        smart_code_block
+        expand_link
+      ]
+    end
   end
 end

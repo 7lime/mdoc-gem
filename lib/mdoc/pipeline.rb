@@ -44,6 +44,11 @@ module Mdoc
       prc.map { |pn| @processors.delete(pn) }
     end
 
+    def enabled?(prc)
+      prc = get_prc(prc)
+      @processors.include(prc)
+    end
+
     # recursively apply processors to document
     def apply!(document)
       @processors.each do |pn|

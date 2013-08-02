@@ -2,7 +2,7 @@ module Mdoc
   # delegate output to pandoc (assume pandoc in path)
   class PandocWriter < Writer
     def out(doc)
-      @tmp_file = doc.out_file + '.temp__'
+      @tmp_file = doc.out_file ? doc.out_file + '.temp__' : ''
       Mdoc.opts.no_output ? $stdout : File.new(@tmp_file, 'wb')
     end
 
@@ -15,6 +15,11 @@ module Mdoc
         `pandoc -o #{doc.out_file} #{@tmp_file}`
         File.delete @tmp_file
       end
+    end
+
+    def default_processors
+      %w[smart_code_block
+      expand_link]
     end
   end
 end

@@ -1,4 +1,6 @@
-# Mdoc-gem
+
+Mdoc-gem
+============
 
 A tool for convert document between several different formats.
 
