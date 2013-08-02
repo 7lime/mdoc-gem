@@ -2,7 +2,7 @@
 # encoding: utf-8
 # vi: ft=ruby
 
-# $LOAD_PATH.unshift 'lib' # debug only
+$LOAD_PATH.unshift 'lib' # debug only
 require 'mdoc'
 
 Mdoc.load_conf_files %w[/etc/mdoc.conf ~/.mdoc.conf]

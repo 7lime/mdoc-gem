@@ -7,7 +7,7 @@ module Mdoc
 
     def load(contents)
       # contents is expected as a hash in yaml format
-      YAML.load(contents).each { |k, v| self.send("#{k}=".to_sym, v) }
+      YAML.load(contents).each { |k, v| send("#{k}=".to_sym, v) }
       self
     end
   end

@@ -10,6 +10,7 @@ require 'mdoc/processor/add_toc'
 require 'mdoc/processor/expand_link'
 require 'mdoc/pipeline'
 require 'mdoc/writer'
+require 'mdoc/writer/pandoc_writer'
 
 # individual processors
 
@@ -49,7 +50,7 @@ module Mdoc
     doc_type = find_doc_type(fname) unless doc_type
     doc = doc_type.new(fname)
     # template
-    doc.tpl_file = find_tpl_file
+    doc.tpl_file = find_tpl_file(opts.template)
 
     # output file
     doc.out_file = find_out_file(fname) unless opts.no_output
@@ -58,16 +59,16 @@ module Mdoc
 
   # from several directory
   # rubocop:disable MethodLength
-  def find_tpl_file
+  def find_tpl_file(fname)
     # add default search directory
     ipath = File.expand_path(File.dirname(__FILE__) + '/../templates')
     opts.tpl_directories << ipath unless opts.tpl_directories.include?(ipath)
     rpath = File.expand_path('./templates')
     opts.tpl_directories << rpath unless opts.tpl_directories.include?(rpath)
 
-    opts.template = 'default.' + opts.template unless opts.template =~ /\./
+    fname = 'default.' + fname unless fname =~ /\./
     cand, buf = [], nil
-    opts.template.split('.').reverse.each do |b|
+    fname.split('.').reverse.each do |b|
       buf = buf ? b + '.' + buf : b
       cand.unshift buf
     end
@@ -79,7 +80,7 @@ module Mdoc
       end
     end
 
-    raise 'no template file found for ' + opts.template
+    # raise 'no template file found for ' + opts.template
     nil
   end
   # rubocop:enable MethodLength
@@ -92,11 +93,9 @@ module Mdoc
 
   # get class from keyword and module under Mdoc name space
   def get_class(cname, mdl = Processor)
-    begin
-      mdl.const_get(cname.split(/[\,\_]/).map { |p| p.capitalize }.join)
-    rescue NameError
-      return nil
-    end
+    mdl.const_get(cname.split(/[\,\_]/).map { |p| p.capitalize }.join)
+  rescue NameError
+    return nil
   end
 
   def get_processor(pn)
@@ -137,7 +136,7 @@ module Mdoc
   def find_writer(doc)
     case opts.template
     when /pandoc\.\w+$/
-      Writer::Pandoc
+      PandocWriter
     else Writer
     end
   end
