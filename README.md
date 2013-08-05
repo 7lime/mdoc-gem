@@ -85,6 +85,22 @@ You can disable some of the processors by:
 
     mdoc -z add_toc,smart_code_block readme.md
 
+## Built-in Non-default Processors
+
+- `js_sequnce`: use the following command:
+
+    mdoc -p js_sequence file.md
+
+  to convert:
+
+    a->b: send()
+    b->c: send_to()
+    c->a: response()
+
+  to UML sequence diagrams with js-sequence-diagrams tools[^3]
+
+[^3] ->http://bramp.github.io/js-sequence-diagrams/
+
 ## Use Mdoc as a Library
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~ ruby
