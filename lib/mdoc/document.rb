@@ -81,7 +81,8 @@ module Mdoc
     end
     # rubocop:enable MethodLength
 
-    def_delegators :@meta, :title, :author, :date
+    def_delegators :@meta, :title, :author, :date, :header_js_libs,
+                   :footer_js_libs, :footer_js_srcs
 
   end
 end
