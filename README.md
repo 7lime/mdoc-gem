@@ -97,9 +97,9 @@ You can disable some of the processors by:
     b->c: send_to()
     c->a: response()
 
-  to UML sequence diagrams with js-sequence-diagrams tools[^3]
+  to UML sequence diagrams with js-sequence-diagrams tools[^3].
 
-[^3] ->http://bramp.github.io/js-sequence-diagrams/
+[^3]: ->http://bramp.github.io/js-sequence-diagrams/
 
 ## Use Mdoc as a Library
 
