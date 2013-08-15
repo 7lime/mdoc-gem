@@ -2,15 +2,15 @@ module Mdoc
   class Processor
     class Jqplot < Processor
       def process!(doc)
-        doc.meta.footer_js_libs << './js/jquery.min.js'
-        doc.meta.footer_js_libs << './js/jquery.jqplot.min.js'
-        doc.meta.footer_js_libs << './js/plugins/jqplot.categoryAxisRenderer.min.js'
-        doc.meta.footer_js_libs << './js/plugins/jqplot.barRenderer.min.js'
+        doc.meta.header_js_libs << './js/jquery.min.js'
+        doc.meta.header_js_libs << './js/jquery.jqplot.min.js'
+        doc.meta.header_js_libs << './js/plugins/jqplot.categoryAxisRenderer.min.js'
+        doc.meta.header_js_libs << './js/plugins/jqplot.barRenderer.min.js'
         # doc.meta.footer_js_srcs << '$(".diagram").sequenceDiagram({theme: "hand"});'
         new_body = ''
         doc.body.split("\n").each do |line|
-          if /^\s*#jqplot#(?<id_>\w+)#(?<title_>.+?)#\s*(?<line_>.+)/ =~ line
-            new_body <<-END
+          if /^\s*#jqplot_bar#(?<id_>\w+)#(?<title_>.+?)#\s*(?<line_>.+)$/ =~ line
+            new_body += <<-ENDC
   <div id="#{id_}" style="height:400px;width:700px; "></div>
   <script type="text/javascript">
 $(document).ready(function(){
@@ -34,9 +34,9 @@ $(document).ready(function(){
     });
 });
   </script>
-            END
+            ENDC
           else
-            new_body << line << "\n"
+            new_body << line + "\n"
           end
         end
 
