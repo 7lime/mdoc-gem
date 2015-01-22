@@ -1,20 +1,23 @@
-$LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
+# coding: utf-8
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'mdoc/version'
 
-Gem::Specification.new 'mdoc', Mdoc::VERSION do |s|
-  s.description       = 'A tool for convert document between several different formats.'
-  s.summary           = 'Convert markdown/reStructure/... of documents to html/docx/pdf/... formats.'
-  s.authors           = ['Huang Wei']
-  s.email             = 'huangw@pe-po.com'
-  s.homepage          = 'https://github.com/7lime/mdoc-gem'
-  s.files             = `git ls-files`.split("\n") - %w[.gitignore]
-  s.executables       << 'mdoc'
-  s.license           = 'MIT'
-  s.test_files        = Dir.glob('{spec,test}/**/*.rb')
+Gem::Specification.new do |spec|
+  spec.name          = "mdoc"
+  spec.version       = Mdoc::VERSION
+  spec.authors       = ["Huang Wei"]
+  spec.email         = ["huangw@pe-po.com"]
+  spec.summary       = %q{Markdown to html converter with plug-in processors.}
+  spec.description   = %q{Based on kramdown or redcloth, convert markdown to html, with pre/post plug-in processors to implement custom extensions.}
+  spec.homepage      = "https://github.com/7lime/mdoc-gem"
+  spec.license       = "MIT"
 
-  s.add_dependency 'kramdown'
-  s.add_dependency 'tilt'
-  s.add_development_dependency 'rspec', '~> 2.5'
-  s.add_development_dependency 'simplecov', '~> 2.5'
+  spec.files         = `git ls-files -z`.split("\x0")
+  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
+  spec.require_paths = ["lib"]
+
+  spec.add_development_dependency "bundler", "~> 1.7"
+  spec.add_development_dependency "rake", "~> 10.0"
 end
-
