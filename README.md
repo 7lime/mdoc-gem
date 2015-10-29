@@ -13,9 +13,27 @@ Or add `gem 'mdoc'` into your `Gemfile`.
 ## Usage
 
 ```ruby
-doc = Mdoc.new('some_markdown_file.md')
-doc.plugins << Mdoc::Plugins::TodoList.new(...)
-doc.before_convert do
-  # process some thing on the fly
-end
+doc = Mdoc.new(line_converters: ClassName, ...)
+doc.line_converters << Mdoc::LineConverters::TodoList.new(options ...)
+doc.line_converters << Mdoc::LineConverters::SourceSpec.new(options ...)
+
+...
+
+doc.load('some_markdown_file.md')
+p doc.source
+
+p doc.pre_converters # call before convert to html
+
+p doc.converter # default: Mdoc::KramdownConverter
+doc.convert
+
+p doc.post_converters # called after convert to html
+
+p doc.html
 ```
+
+## Concept
+
+- Static project document manager live inside the project repository
+- Live update with Guard
+- Programmatically customizable convert chain
