@@ -1,0 +1,16 @@
+Mdoc: Document Converter Chain
+================================================
+Created at 2015-10-28
+
+% ----
+title: mdoc gem
+description: Document Convert Chain
+supervisor: huangw
+leader: huangw
+moderator: huangw
+team: [huangw]
+year: 2015
+% ----
+
+[+] concept: packing list and concept in read me 10/28 @huangw
+[+] release_v0_1_0: release the first revised gem version  10/29 @huangw
